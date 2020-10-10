@@ -20,8 +20,8 @@ const DetailsBanner = (props) => {
           </span>
         </div>
         <SaveButtonFormat>
-            <SaveButton>
-              <HeartButton saved={props.listing.saved} saveListing={props.saveListing} />
+            <SaveButton onClick={props.saveListing}>
+              <HeartButton saved={props.listing.saved} id={props.listing.id} saveListing={props.saveListing} />
           Save
             </SaveButton>
         </SaveButtonFormat>

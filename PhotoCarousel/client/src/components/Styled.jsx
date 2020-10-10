@@ -1,23 +1,49 @@
 import styled from 'styled-components';
 
 const PhotoHeader = styled.img`
-width: 100%;
-height: 100px;
-margin: auto;
-text-align: center;
-object-fit: contain;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  object-fit: contain;
+  height: 100%;
 `;
 
+const BoxPhotoIcon = styled.i`
+  padding: 0px 4px;
+  font-size: 14px;
+`;
+
+const ImageBoxFormat = styled.div`
+  display: grid;
+  margin: auto;
+  height: 425px;
+  width: 992px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 50% 50% 50%;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  overflow: hidden;
+  transition: transform .5s ease;
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+`;
 const StaticHeader = styled.div`
-  position: static;
+  position: fixed;
+  background-color: white;
   padding: 10px;
+  width: 100%;
+  top: 0px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: rgb(232, 233, 234);
+  z-index: 2;
 `;
 
 const SearchBar = styled.input`
-  padding-right: 300px;
+  padding-right: 200px;
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 16px;
@@ -25,10 +51,13 @@ const SearchBar = styled.input`
   border: 1px solid rgb(245, 246, 247);
   border-radius: 8px;
   background-color: rgb(245, 246, 247);
+  box-sizing: border-box;
 `;
 
 const SearchBarContainer = styled.div`
   margin-left: 15px;
+  margin-right: -40px;
+  box-sizing: border-box;
   display: inline;
 `;
 
@@ -54,11 +83,11 @@ const NewTag = styled(StatusTags)`
 `;
 const SaveButton = styled.button`
   text-align: center;
-  outline: none;
-  position: relative;
+  outline: 0;
+  position: absolute;
   background-color: white;
-  left: 755px;
   padding: 2px 16px;
+  white-space: nowrap;
   color: rgb(59, 65, 68);
   border-color: rgb(205, 209, 212);
   border-radius: 8px;
@@ -74,9 +103,15 @@ const SaveButton = styled.button`
   }
   &:active {
     color: rgb(255, 255, 255);
-    background-color: rgba(85, 85, 87, 0.678);
+    background-color: rgb(134, 144, 153);
+    outline: none;
+    border-color: transparent;
+    transition: top 0.1s ease 0s, box-shadow 0.1s ease 0s, border-color 0.1s ease 0s, background-color 0.1s ease 0s, color 0.1s ease 0s;
   }
-
+  &:focus {
+    border-color: rgb(134, 144, 153);
+    outline: none;
+  }
 `;
 
 const ModalSaveButton = styled(SaveButton)`
@@ -85,19 +120,23 @@ const ModalSaveButton = styled(SaveButton)`
   height: 40px;
   align-self: center;
   position: relative;
-  left: -20px;
   text-align: center;
+  z-index: 2;
 `;
 
+const ModalSaveButtonContainer = styled.div`
+  grid-area: 1 / 9 / 1 / 11 ;
+  margin: auto;
+`;
 const HeartButtonEmpty = styled.i`
-text-align: center;
-font-size: 24px;
-font-weight: bold;
-padding-right: 10px;
-color: rgb(0, 120, 130);
-&:active {
-  color: rgb(255, 255, 255);
-}
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding-right: 10px;
+  color: rgb(0, 120, 130);
+  &:active {
+    color: rgb(255, 255, 255);
+  }
 `;
 
 const HeartButtonFilled = styled(HeartButtonEmpty)`
@@ -117,38 +156,17 @@ const DetailFooter = styled.button`
   color: white;
   border: none;
   font-weight: bold;
-  outline:none;
+  outline: none;
   &:hover {
     background-color: rgb(170, 170, 170);
     cursor: pointer;
   }
-`;
-
-const Modal = styled.div`
-  position:fixed;
-  background: white;
-  width: 80%;
-  height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-`;
-
-const ModalBackground = styled.section`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width:100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-`;
-
-const ModalShow = styled(Modal)`
-  display: block
-`;
-
-const ModalHide = styled(Modal)`
-  display: none
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    outline: none;
+  }
 `;
 
 const Arrow = styled.i`
@@ -175,24 +193,26 @@ const HomeInterior = styled.span`
   margin: 6px;
 `;
 
-const HomeInteriorIcons = styled.i`
-  margin-right: 6px;
-  color: rgb(134, 144, 153);
+const HomeInteriorIcons = styled.img`
+  height: 20px;
+  padding-right: 4px;
+  position: relative;
+  top: -2px;
 `;
 
 const BreadCrumbs = styled.div`
   text-align: center;
   vertical-align: center;
   position: relative;
-  top: -0px;
-  left: -180px;
+  left: -220px;
   position: relative;
-  margin: 0px 0px 5px 0px;
+  margin: 6px 0px 8px 0px;
+  font-size: 14px;
+  letter-spacing: -0.1px;
 `;
 
 const SearchBreadcrumb = styled.span`
   color: rgb(0, 120, 130);
-  font-size: 14px;
   font-weight: bold;
   margin-right: 30px;
 `;
@@ -296,7 +316,8 @@ const HomeInteriorDetails = styled.div`
 `;
 
 const SaveButtonFormat = styled.div`
-  position: relative;
+  position: absolute;
+  left: 880px;
 `;
 
 const HomePrice = styled.div`
@@ -312,12 +333,14 @@ const HeroContainer = styled.div`
   display: flex;
   padding: 0 4px;
   align-items: center;
+  height: 100%;
 `;
 
 const TileContainer = styled.div`
   align-items: center;
   margin: auto;
   width: 992px;
+  height: 100%;
   border-radius: 8px;
   position: relative;
 `;
@@ -326,6 +349,7 @@ const TileBackground = styled.div`
   margin: auto;
   border-radius: 8px;
   overflow: hidden;
+  height: 100%;
 `;
 
 const MainImage = styled.div`
@@ -390,7 +414,7 @@ const ModalGrid = styled.div`
 const HeaderStyle = styled.div`
   grid-area: 1 / 1 / 2 / 4;
   background-color: white;
-  height: 45%;
+  height: 50px;
   width: 100%;
   border-radius: 5px 5px 0px 0px;
   display: grid;
@@ -402,16 +426,25 @@ const CloseButton = styled.div`
   grid-area: 1 / 10 / 1 / 11 ;
   text-align: right;
   align-self: center;
-  margin: 0px 10px;
-  font-size: 30px;
+  margin: 0px 15px;
+  font-size: 24px;
+  position: relative;
+  left: -10px;
   color: rgb(59, 65, 68);
+`;
+
+const Close = styled.span`
+  text-align: right;
+  &:hover {
+    color: rgb(0,120,130);
+    cursor: pointer;
+  }
 `;
 
 const BodyStyle = styled.div`
   grid-area: 1 / 1 / 6 / 4;
   width: 100%;
   height: 100%;
-  min-height: 550px;
   margin: auto;
 `;
 
@@ -482,12 +515,118 @@ const BackDropStyle = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(20px);
   padding: 50px;
-  z-index: 2;
+  z-index: 3;
   transform: scale(1);
   transition-timing-function: ease-in-out;
 `;
+
+const BuyRentMortgage = styled.span`
+  box-sizing: border-box;
+  padding: 10px 15px;
+  margin: 0px 4px;
+  color: rgb(59, 65, 68);
+  font-weight: bold;
+  white-space: nowrap;
+  &:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(0,120,130);
+    padding: 8px 15px;
+  }
+`;
+
+const StyledLink = styled.a`
+  font-weight: bold;
+  &:hover {
+    color: rgb(59, 65, 68);
+    text-decoration: none;
+    cursor: auto;
+  }
+`;
+
+const DropDownMenu = styled.div`
+  display: inline-block;
+  position: relative;
+`;
+
+const ProfileInfo = styled.div`
+  display: inline-block;
+  position: relative;
+  left: 14%;
+`;
+
+const ListIcon = styled.i`
+  color: rgb(0, 120, 130);
+  margin-left: 20px;
+  font-size: 18px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const WebPageFormat = styled.div`
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+`;
+
+const SearchButton = styled.div`
+  position: relative;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  right: 0px;
+  left: -3%;
+  top: 0px;
+  height: 100%;
+  cursor: pointer;
+  background-color: rgb(217, 60, 35);
+  padding: 9px 14px;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  transition: background-color 0.15s ease 0s;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(156, 17, 20);
+  }
+`;
+
+const SearchIcon = styled.i`
+  color: white;
+`;
+
+const NewestListings = styled.a`
+  border-top: silver;
+  border-top-width: 1px;
+  border-top-style: solid;
+  text-align: center;
+  white-space: nowrap;
+  padding: 12px 0px;
+  &:hover {
+    color: rgb(59, 65, 68);
+    text-decoration: none;
+    background-color: #ddd;
+  }
+`;
+
+const DropDownContentLinks = styled.a`
+  color: rgb(59, 65, 68);
+  padding: 6px 40px 6px 14px;
+  text-decoration: none;
+  display: block;
+  letter-spacing: -0.1;
+  text-align: left;
+  &:hover {
+    color: rgb(59, 65, 68);
+    text-decoration: none;
+    background-color: #ddd;
+  }
+`;
 export {
   SearchBar,
+  ImageBoxFormat,
+  BoxPhotoIcon,
   PhotoHeader,
   TruliaLogo,
   StaticHeader,
@@ -498,9 +637,6 @@ export {
   HeartButtonEmpty,
   DetailFooter,
   HeartButtonFilled,
-  ModalShow,
-  ModalHide,
-  ModalBackground,
   ModalSaveButton,
   Arrow,
   HomeAddress,
@@ -541,9 +677,21 @@ export {
   PhotoSection,
   PrimaryImage,
   PhotoIcon,
+  ModalSaveButtonContainer,
   ForwardArrow,
   MainPhoto,
   StaticSchedulerFormat,
   StaticSchedulerPhoto,
   BackDropStyle,
+  BuyRentMortgage,
+  StyledLink,
+  DropDownMenu,
+  ProfileInfo,
+  ListIcon,
+  WebPageFormat,
+  SearchButton,
+  SearchIcon,
+  NewestListings,
+  DropDownContentLinks,
+  Close,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import HeartButton from './HeartButton.jsx';
-import { SaveButton, ModalSaveButton, ModalStyle, ModalGrid, HeaderStyle, CloseButton, BodyStyle, FooterStyle, BackDropStyle } from './Styled.jsx';
+import { SaveButton, ModalSaveButton, ModalStyle, ModalGrid, HeaderStyle, CloseButton, BodyStyle, FooterStyle, BackDropStyle, Close, ModalSaveButtonContainer } from './Styled.jsx';
 import Carousel from './Carousel.jsx';
 import LeftArrow from './LeftArrow.jsx';
 
@@ -15,27 +15,26 @@ class Modal extends React.Component {
     this.props.onClose && this.props.onClose(e)
   }
 
-  disableOnClick(e) {
-    console.log('i ran disable onClick')
-    this.props.disableOnClick && this.props.disableOnClick(e);
-  }
-
   render() {
     if (!this.props.show) {
       return null;
     }
     return (
-      <BackDropStyle>
-        <ModalStyle>
+      <BackDropStyle onClick={(e) => { this.onClose(e) }}>
+        <ModalStyle onClick={(e) => {e.stopPropagation()}}>
           <ModalGrid>
             <HeaderStyle>
-              <CloseButton onClick={(e) => { this.onClose(e) }}>
-                X
+              <CloseButton>
+                <Close onClick={(e) => { this.onClose(e) }}>
+                  X
+                </Close>
               </CloseButton>
-              <ModalSaveButton>
-                <HeartButton />
-              Save
-              </ModalSaveButton>
+              <ModalSaveButtonContainer>
+                <ModalSaveButton onClick={this.props.saveListing}>
+                  <HeartButton saved={this.props.listing[0].saved} />
+                  Save
+                </ModalSaveButton>
+              </ModalSaveButtonContainer>
             </HeaderStyle>
             <BodyStyle>
               <Carousel images={this.props.listing[0].image} price={this.props.listing[0].price} homeAddress={this.props.listing[0].homeAddress}/>

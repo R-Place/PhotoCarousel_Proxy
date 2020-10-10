@@ -6,6 +6,7 @@ import HomeDetails from './HomeDetails.jsx';
 import Header from './Header.jsx';
 import Modal from './Modal.jsx';
 import Breadcrumbs from './Breadcrumbs.jsx';
+import { BodyFormat, WebPageFormat } from './Styled.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getListingInfo(16);
+    this.getListingInfo(10);
   }
 
   getListingInfo(id) {
@@ -31,18 +32,19 @@ class App extends React.Component {
   }
 
   saveListing() {
+    console.log('i ran!!!!!!')
     let copyOfListing = this.state.listing;
     copyOfListing[0].saved = !copyOfListing[0].saved;
     this.setState({
       listing: copyOfListing
-    }, () => {console.log(this.state)});
+    });
   }
 
   toggleModal() {
     console.log('i ran toggleModal');
     this.setState({
       show: !this.state.show
-    }, () => {console.log(this.state)})
+    })
   }
 
   disableToggleModal() {
@@ -53,9 +55,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Modal toggleModal={this.toggleModal} show={this.state.show} onClose={this.toggleModal} listing={this.state.listing}
-        >
+      <WebPageFormat>
+        <Modal show={this.state.show} onClose={this.toggleModal} listing={this.state.listing} saveListing={this.saveListing}>
         </Modal>
         < Header />
         {
@@ -73,7 +74,7 @@ class App extends React.Component {
             <HomeDetails listing={listing} />
           ))
         }
-      </div>
+      </WebPageFormat>
     )
   }
 }
