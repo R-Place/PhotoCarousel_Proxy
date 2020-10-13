@@ -12,3 +12,4 @@ describe ('<App />', () => {
     App.prototype.componentDidMount.restore();
   });
 });
+

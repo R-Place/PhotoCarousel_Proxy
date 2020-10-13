@@ -3,21 +3,21 @@ import styled from 'styled-components';
 
 
 const AffordabiltyContainer = styled.div`
-font-family: TruliaSans, system, -apple-system, Roboto, "Segoe UI Bold", Arial, sans-serif;
-color: rgb(59, 65, 68);
-font-size: 14px;
-line-height: 1.5;
-letter-spacing: -0.1px;
-box-sizing: border-box;
-outline: none;
-margin: 32px 0px;
-display: flex;
-flex-direction: column;
-position: absolute;
-top: 223%;
-left: 55%;
-margin-right: -30%;
-transform: translate(-50%, -50%);
+  font-family: TruliaSans, system, -apple-system, Roboto, "Segoe UI Bold", Arial, sans-serif;
+  color: rgb(59, 65, 68);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.1px;
+  box-sizing: border-box;
+  outline: none;
+  margin: 32px 0px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 223%;
+  left: 55%;
+  margin-right: -30%;
+  transform: translate(-50%, -50%);
 `;
 
 const AffordabilityText = styled.div`

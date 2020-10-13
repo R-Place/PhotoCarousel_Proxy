@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   getListings() {
-    axios.get('http://localhost:3002/api/similarHomes')
+    axios.get('http://localhost:3006/api/similarHomes')
       // .then((res) => res.data.slice(0, 14))
       .then((res) => this.setState({ listings: res.data }));
   }

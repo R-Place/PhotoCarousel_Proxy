@@ -22,11 +22,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getListingInfo(10);
+    console.log(window.location.href);
+    let param = Number(window.location.search.slice(4));
+    param = (param || 3);
+    this.getListingInfo(param);
   }
 
   getListingInfo(id) {
-    axios.get(`http://localhost:3001/api/addresses/${id}`)
+    axios.get(`/api/addresses/${id}`)
     .then(result => this.setState({ listing: result.data }))
     .catch(err => this.setState({ err }))
   }
@@ -74,6 +77,7 @@ class App extends React.Component {
             <HomeDetails listing={listing} />
           ))
         }
+
       </WebPageFormat>
     )
   }

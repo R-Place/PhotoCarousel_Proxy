@@ -1,15 +1,15 @@
 
 /* Carousel Photo Settings */
 
-/* .inactive {
-  display: none;
+#similarHomes {
+  position: relative;
+  bottom: 850px;
+  right: 300px;
 }
 
-.active {
-  display: flex;
-  height: 100%;
-  width: 90%;
-} */
+#affordability {
+  position: relative;
+}
 
 /*DropDown Menus*/
 /* .dropdown {

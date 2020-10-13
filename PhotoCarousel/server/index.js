@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../database/index.js');
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
@@ -26,7 +26,6 @@ app.get('/api/addresses/:id', (req, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
       res.status(200).send(data);
     }
   });
