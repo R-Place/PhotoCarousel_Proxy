@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  photocarousel:
+    build: PhotoCarousel/
+    depends_on:
+      - 'database'
+    restart: on-failure
+    ports:
+      - '4001:3001'
+
+  proxyserver:
+    build: PhotoCarousel_Proxy/
+    ports:
+      - '3004:3004'
+
+  database:
+    image: mongo:latest
